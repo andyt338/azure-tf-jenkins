@@ -55,8 +55,8 @@ resource "azurerm_network_interface" "helloterraformnic" {
     }
 }
 # create storage account
-resource "azurerm_storage_account" "redapt87" {
-    name = "redapt87"
+resource "azurerm_storage_account" "redapt86" {
+    name = "redapt86"
     resource_group_name = "${azurerm_resource_group.helloterraform.name}"
     location = "westus"
     account_type = "Standard_LRS"
@@ -65,12 +65,12 @@ resource "azurerm_storage_account" "redapt87" {
     }
 }
 # create storage container
-resource "azurerm_storage_container" "redapt87storagecontainer" {
+resource "azurerm_storage_container" "redapt86storagecontainer" {
     name = "vhd"
     resource_group_name = "${azurerm_resource_group.helloterraform.name}"
-    storage_account_name = "${azurerm_storage_account.redapt87.name}"
+    storage_account_name = "${azurerm_storage_account.redapt86.name}"
     container_access_type = "private"
-    depends_on = ["azurerm_storage_account.redapt87"]
+    depends_on = ["azurerm_storage_account.redapt86"]
 }
 # create virtual machine
 resource "azurerm_virtual_machine" "helloterraformvm" {
@@ -87,7 +87,7 @@ resource "azurerm_virtual_machine" "helloterraformvm" {
     }
     storage_os_disk {
         name = "myosdisk"
-        vhd_uri = "${azurerm_storage_account.redapt87.primary_blob_endpoint}${azurerm_storage_container.redapt87storagecontainer.name}/myosdisk.vhd"
+        vhd_uri = "${azurerm_storage_account.redapt86.primary_blob_endpoint}${azurerm_storage_container.redapt86storagecontainer.name}/myosdisk.vhd"
         caching = "ReadWrite"
         create_option = "FromImage"
     }
