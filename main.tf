@@ -7,10 +7,10 @@ provider "azure" {
 # for tenant_id, from the portal, if you click on the Help icon in the upper right and then choose 
 # 'Show Diagnostics' you can find the tenant id in the diagnostic JSON.
 provider "azurerm" {
-  subscription_id = "..."
-  client_id       = "..."
-  client_secret   = "..."
-  tenant_id       = "..."
+  subscription_id = "b866fe50-afff-4cf3-b9cc-fe2c826abfba"
+  client_id       = "f0ac0c60-15fc-48e9-a832-4126497651b8"
+  client_secret   = "L4obqfBx3Q66cys/8MZ721pJCd0nkookL2xRr4hG1uk="
+  tenant_id       = "116e9905-19fc-428e-93d4-bcaffb833597"
 }
 # create a resource group 
 resource "azurerm_resource_group" "helloterraform" {
@@ -55,8 +55,8 @@ resource "azurerm_network_interface" "helloterraformnic" {
     }
 }
 # create storage account
-resource "azurerm_storage_account" "redapt89" {
-    name = "redapt89"
+resource "azurerm_storage_account" "redapt88" {
+    name = "redapt88"
     resource_group_name = "${azurerm_resource_group.helloterraform.name}"
     location = "westus"
     account_type = "Standard_LRS"
@@ -65,12 +65,12 @@ resource "azurerm_storage_account" "redapt89" {
     }
 }
 # create storage container
-resource "azurerm_storage_container" "redapt89storagecontainer" {
+resource "azurerm_storage_container" "redapt88storagecontainer" {
     name = "vhd"
     resource_group_name = "${azurerm_resource_group.helloterraform.name}"
-    storage_account_name = "${azurerm_storage_account.redapt89.name}"
+    storage_account_name = "${azurerm_storage_account.redapt88.name}"
     container_access_type = "private"
-    depends_on = ["azurerm_storage_account.redapt89"]
+    depends_on = ["azurerm_storage_account.redapt88"]
 }
 # create virtual machine
 resource "azurerm_virtual_machine" "helloterraformvm" {
@@ -87,7 +87,7 @@ resource "azurerm_virtual_machine" "helloterraformvm" {
     }
     storage_os_disk {
         name = "myosdisk"
-        vhd_uri = "${azurerm_storage_account.redapt89.primary_blob_endpoint}${azurerm_storage_container.redapt89storagecontainer.name}/myosdisk.vhd"
+        vhd_uri = "${azurerm_storage_account.redapt88.primary_blob_endpoint}${azurerm_storage_container.redapt88storagecontainer.name}/myosdisk.vhd"
         caching = "ReadWrite"
         create_option = "FromImage"
     }
