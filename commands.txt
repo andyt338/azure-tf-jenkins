@@ -1,4 +1,0 @@
-git add -A
-git commit -m "test"
-git push origin master
-Invoke-WebRequest http://localhost:8080/git/notifyCommit?url=https://github.com/andyt338/azure-tf-jenkins
