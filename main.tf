@@ -1,7 +1,3 @@
-# to download this, visit https://manage.windowsazure.com/publishsettings/index?client=powershell
-provider "azure" {
-  publish_settings = "${file("Free Trial-6-28-2017-credentials.publishsettings")}"
-}
 # for subscription_id, create a subscription or use an existing one, and find it in portal.azure.com
 # for client_id and client_secret, see https://www.terraform.io/docs/providers/azurerm/index.html
 # for tenant_id, from the portal, if you click on the Help icon in the upper right and then choose 
