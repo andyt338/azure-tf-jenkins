@@ -83,7 +83,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 }
 
-/*
+
 
 resource "azurerm_public_ip" "lbpip" {
   name                         = "${var.rg_prefix}-ip"
@@ -146,4 +146,3 @@ resource "azurerm_lb_probe" "lb_probe" {
   number_of_probes    = 2
 }
 
-*/
