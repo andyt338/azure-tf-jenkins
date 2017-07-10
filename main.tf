@@ -40,6 +40,51 @@ resource "azurerm_subnet" "subnet" {
   address_prefix       = "${var.subnet_prefix}"
 }
 
+resource "azurerm_network_interface" "nic" {
+  name                = "nic${count.index}"
+  location            = "${var.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+  count               = 2
+
+  ip_configuration {
+    name                                    = "ipconfig${count.index}"
+    subnet_id                               = "${azurerm_subnet.subnet.id}"
+    private_ip_address_allocation           = "Dynamic"
+    #load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.backend_pool.id}"]
+    #load_balancer_inbound_nat_rules_ids     = ["${element(azurerm_lb_nat_rule.tcp.*.id, count.index)}"]
+  }
+}
+
+resource "azurerm_virtual_machine" "vm" {
+  name                  = "vm${count.index}"
+  location              = "${var.location}"
+  resource_group_name   = "${azurerm_resource_group.rg.name}"
+  availability_set_id   = "${azurerm_availability_set.avset.id}"
+  vm_size               = "${var.vm_size}"
+  network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
+  count                 = 2
+
+  storage_image_reference {
+    publisher = "${var.image_publisher}"
+    offer     = "${var.image_offer}"
+    sku       = "${var.image_sku}"
+    version   = "${var.image_version}"
+  }
+
+  storage_os_disk {
+    name          = "osdisk${count.index}"
+    create_option = "FromImage"
+  }
+
+  os_profile {
+    computer_name  = "${var.hostname}"
+    admin_username = "${var.admin_username}"
+    admin_password = "${var.admin_password}"
+  }
+}
+
+/*
+
 resource "azurerm_public_ip" "lbpip" {
   name                         = "${var.rg_prefix}-ip"
   location                     = "${var.location}"
@@ -101,46 +146,4 @@ resource "azurerm_lb_probe" "lb_probe" {
   number_of_probes    = 2
 }
 
-resource "azurerm_network_interface" "nic" {
-  name                = "nic${count.index}"
-  location            = "${var.location}"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
-  count               = 2
-
-  ip_configuration {
-    name                                    = "ipconfig${count.index}"
-    subnet_id                               = "${azurerm_subnet.subnet.id}"
-    private_ip_address_allocation           = "Dynamic"
-    load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.backend_pool.id}"]
-    load_balancer_inbound_nat_rules_ids     = ["${element(azurerm_lb_nat_rule.tcp.*.id, count.index)}"]
-  }
-}
-
-resource "azurerm_virtual_machine" "vm" {
-  name                  = "vm${count.index}"
-  location              = "${var.location}"
-  resource_group_name   = "${azurerm_resource_group.rg.name}"
-  availability_set_id   = "${azurerm_availability_set.avset.id}"
-  vm_size               = "${var.vm_size}"
-  network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
-  count                 = 3
-
-  storage_image_reference {
-    publisher = "${var.image_publisher}"
-    offer     = "${var.image_offer}"
-    sku       = "${var.image_sku}"
-    version   = "${var.image_version}"
-  }
-
-  storage_os_disk {
-    name          = "osdisk${count.index}"
-    create_option = "FromImage"
-  }
-
-  os_profile {
-    computer_name  = "${var.hostname}"
-    admin_username = "${var.admin_username}"
-    admin_password = "${var.admin_password}"
-  }
-}
-
+*/
