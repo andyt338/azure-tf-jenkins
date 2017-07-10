@@ -123,7 +123,7 @@ resource "azurerm_virtual_machine" "vm" {
   availability_set_id   = "${azurerm_availability_set.avset.id}"
   vm_size               = "${var.vm_size}"
   network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
-  count                 = 2
+  count                 = 3
 
   storage_image_reference {
     publisher = "${var.image_publisher}"
