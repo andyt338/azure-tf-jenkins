@@ -83,8 +83,6 @@ resource "azurerm_virtual_machine" "vm" {
   }
 }
 
-/*
-
 resource "azurerm_public_ip" "lbpip" {
   name                         = "${var.rg_prefix}-ip"
   location                     = "${var.location}"
@@ -145,6 +143,3 @@ resource "azurerm_lb_probe" "lb_probe" {
   interval_in_seconds = 5
   number_of_probes    = 2
 }
-
-*/
-
