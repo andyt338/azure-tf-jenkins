@@ -100,27 +100,3 @@ resource "azurerm_virtual_machine" "helloterraformvm" {
     }
 }
 
-resource "azurerm_virtual_machine_extension" "test" {
-  name                 = "hostname"
-  location             = "West US"
-  resource_group_name  = "${azurerm_resource_group.test.name}"
-  virtual_machine_name = "${azurerm_virtual_machine.test.name}"
-  publisher            = "Microsoft.OSTCExtensions"
-  type                 = "CustomScriptForLinux"
-  type_handler_version = "1.2"
-
-  settings = <<SETTINGS
-{
-  "fileUris": "https://raw.githubusercontent.com/andyt338/azure-tf-jenkins/master/userdata.sh"
-}
-SETTINGS
-
-  protected_settings = <<SETTINGS
- {
-   "commandToExecute": "bash userdata.sh"
- }
-
-  tags {
-    environment = "Production"
-  }
-}
