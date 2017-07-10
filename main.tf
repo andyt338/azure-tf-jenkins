@@ -26,14 +26,6 @@ resource "azurerm_availability_set" "avset" {
   managed                      = true
 }
 
-resource "azurerm_public_ip" "lbpip" {
-  name                         = "${var.rg_prefix}-ip"
-  location                     = "${var.location}"
-  resource_group_name          = "${azurerm_resource_group.rg.name}"
-  public_ip_address_allocation = "dynamic"
-  domain_name_label            = "${var.lb_ip_dns_name}"
-}
-
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.virtual_network_name}"
   location            = "${var.location}"
@@ -46,6 +38,14 @@ resource "azurerm_subnet" "subnet" {
   virtual_network_name = "${azurerm_virtual_network.vnet.name}"
   resource_group_name  = "${azurerm_resource_group.rg.name}"
   address_prefix       = "${var.subnet_prefix}"
+}
+
+resource "azurerm_public_ip" "lbpip" {
+  name                         = "${var.rg_prefix}-ip"
+  location                     = "${var.location}"
+  resource_group_name          = "${azurerm_resource_group.rg.name}"
+  public_ip_address_allocation = "dynamic"
+  domain_name_label            = "${var.lb_ip_dns_name}"
 }
 
 resource "azurerm_lb" "lb" {
@@ -143,3 +143,4 @@ resource "azurerm_virtual_machine" "vm" {
     admin_password = "${var.admin_password}"
   }
 }
+
