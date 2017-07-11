@@ -144,10 +144,3 @@ resource "azurerm_virtual_machine" "vm" {
   }
 }
 
-resource "azure_storage_blob" "foo" {
-  name                   = "tftesting-blob"
-  storage_service_name   = "tfstorserv"
-  storage_container_name = "terraform-storage-container"
-  type                   = "PageBlob"
-  size                   = 1024
-}
