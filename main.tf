@@ -62,11 +62,11 @@ resource "azurerm_managed_disk" "datadisk" {
 }
 
 resource "azurerm_virtual_machine" "vm" {
-  name                  = "${var.rg_prefix}vm"
+  name                  = "vm${count.index}"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   vm_size               = "${var.vm_size}"
-  network_interface_ids = ["${azurerm_network_interface.nic.id}"]
+  network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
   count                 = 2
 
   storage_image_reference {
@@ -77,7 +77,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   storage_os_disk {
-    name              = "${var.hostname}-osdisk"
+    name          = "osdisk${count.index}"
     managed_disk_type = "Standard_LRS"
     caching           = "ReadWrite"
     create_option     = "FromImage"
