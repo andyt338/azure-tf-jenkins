@@ -77,14 +77,14 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   storage_os_disk {
-    name          = "osdisk${count.index}"
+    name              = "osdisk${count.index}"
     managed_disk_type = "Standard_LRS"
     caching           = "ReadWrite"
     create_option     = "FromImage"
   }
 
   storage_data_disk {
-    name              = "${var.hostname}-datadisk"
+    name              = "datadisk${count.index}"
     managed_disk_id   = "${azurerm_managed_disk.datadisk.id}"
     managed_disk_type = "Standard_LRS"
     disk_size_gb      = "1023"
