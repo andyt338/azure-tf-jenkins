@@ -1,3 +1,19 @@
+variable "subscription_id" {
+  description = "Subscription ID for your Azure account"
+}
+
+variable "client_id" {
+  description = "Client ID for your Azure account"
+}
+
+variable "client_secret" {
+  description = "Client secret for your Azure account"
+}
+
+variable "tenant_id" {
+  description = "Tenant ID for your Azure account"
+}
+
 variable "resource_group" {
   description = "The name of the resource group in which to create the virtual network."
   default     = "testrg"
