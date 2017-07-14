@@ -91,6 +91,7 @@ resource "azurerm_lb_rule" "lb_rule" {
   depends_on                     = ["azurerm_lb_probe.lb_probe"]
 }
 
+/*
 resource "azurerm_lb_rule" "lb_rule1" {
   resource_group_name            = "${azurerm_resource_group.rg.name}"
   loadbalancer_id                = "${azurerm_lb.lb.id}"
@@ -105,6 +106,7 @@ resource "azurerm_lb_rule" "lb_rule1" {
   probe_id                       = "${azurerm_lb_probe.lb_probe.id}"
   depends_on                     = ["azurerm_lb_probe.lb_probe"]
 }
+*/
 
 resource "azurerm_lb_probe" "lb_probe" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
