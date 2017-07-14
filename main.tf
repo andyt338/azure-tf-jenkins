@@ -1,8 +1,8 @@
 provider "azurerm" {
-  subscription_id = "b866fe50-afff-4cf3-b9cc-fe2c826abfba"
-  client_id       = "f0ac0c60-15fc-48e9-a832-4126497651b8"
-  client_secret   = "L4obqfBx3Q66cys/8MZ721pJCd0nkookL2xRr4hG1uk="
-  tenant_id       = "116e9905-19fc-428e-93d4-bcaffb833597"
+  subscription_id = "${var.subscription_id}"
+  client_id       = "${var.client_id}"
+  client_secret   = "${var.client_secret}"
+  tenant_id       = "${var.tenant_id}"
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -91,6 +91,7 @@ resource "azurerm_lb_rule" "lb_rule" {
   depends_on                     = ["azurerm_lb_probe.lb_probe"]
 }
 
+/*
 resource "azurerm_lb_rule" "lb_rule1" {
   resource_group_name            = "${azurerm_resource_group.rg.name}"
   loadbalancer_id                = "${azurerm_lb.lb.id}"
@@ -105,6 +106,7 @@ resource "azurerm_lb_rule" "lb_rule1" {
   probe_id                       = "${azurerm_lb_probe.lb_probe.id}"
   depends_on                     = ["azurerm_lb_probe.lb_probe"]
 }
+*/
 
 resource "azurerm_lb_probe" "lb_probe" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
