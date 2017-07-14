@@ -160,4 +160,3 @@ resource "azurerm_virtual_machine" "vm" {
     admin_password = "${var.admin_password}"
   }
 }
-
