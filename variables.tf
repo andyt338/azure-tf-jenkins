@@ -26,27 +26,22 @@ variable "rg_prefix" {
 
 variable "hostname" {
   description = "VM name referenced also in storage-related names."
-  default     = "testvm198909"
+  default     = "testvm198234"
 }
 
 variable "dns_name" {
   description = " Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
-  default     = "testvm198909"
+  default     = "testvm198234"
 }
 
 variable "lb_ip_dns_name" {
   description = "DNS for Load Balancer IP"
-  default     = "testvm198909"
+  default     = "testvm198234"
 }
 
 variable "location" {
   description = "The location/region where the virtual network is created. Changing this forces a new resource to be created."
   default     = "southcentralus"
-}
-
-variable "virtual_network_name" {
-  description = "The name for the virtual network."
-  default     = "vnet"
 }
 
 variable "address_space" {
@@ -98,3 +93,10 @@ variable "admin_password" {
   description = "administrator password (recommended to disable password auth)"
   default     = "Password1234!"
 }
+
+
+
+
+
+
+
