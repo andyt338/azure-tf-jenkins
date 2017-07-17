@@ -86,10 +86,12 @@ variable "image_version" {
 
 variable "admin_username" {
   description = "administrator user name"
+  default     = "vmadmin"
 }
 
 variable "admin_password" {
   description = "administrator password (recommended to disable password auth)"
+  default     = "Password1234!"
 }
 
 
