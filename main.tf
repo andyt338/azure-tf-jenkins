@@ -216,8 +216,6 @@ resource "azurerm_availability_set" "avset2" {
   managed                      = true
 }
 
-/*
-
 resource "azurerm_virtual_network_peering" "peer1" {
   name                         = "vNet1-to-vNet2"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
@@ -239,4 +237,3 @@ resource "azurerm_virtual_network_peering" "peer2" {
   use_remote_gateways          = false
 }
 
-*/
