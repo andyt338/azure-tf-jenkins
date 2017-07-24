@@ -236,3 +236,5 @@ resource "azurerm_virtual_network_peering" "peer2" {
   allow_gateway_transit        = false
 }
 
+
+
